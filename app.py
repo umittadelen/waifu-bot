@@ -2,6 +2,8 @@ from llama_cpp import Llama
 from chromaconsole import Color, Style
 import os, json
 
+#! Check if the model file exists
+#! If not, guide the user to download it
 if not os.path.exists("./ana-v1-m7.Q4_K_M.gguf"):
     print(f"{Color.text("#F00")}Model file not found. Please download the model file and place it in the root directory.\n{Color.text("#0F0")}https://huggingface.co/TheBloke/Ana-v1-m7-GGUF/resolve/main/ana-v1-m7.Q4_K_M.gguf {Style.reset()}")
     exit()
@@ -40,6 +42,8 @@ def save_log(personality, prompt):
         json.dump(log_data, log_file, ensure_ascii=False, indent=4)
 
 #TODO: Define the personality and name of the chatbot
+#! Checking for saved personality data
+#! If none exists, create a new one with default values
 if os.path.exists("personality.json"):
     with open("personality.json", "r", encoding="utf-8") as personality_file:
         personality_data = json.load(personality_file)
@@ -53,7 +57,7 @@ else:
     with open("personality.json", "w", encoding="utf-8") as personality_file:
         json.dump(personality_data, personality_file, ensure_ascii=False, indent=4)
 
-# Ask user if they want to start a new conversation or load from the log
+#? Ask the user if they wish to load a previous conversation log or start anew
 load_from_log = input(f"{Color.text("#07F")}Do you want to load from the previous log? {Color.text("#0AF")}{Style.italic()}(y/n): {Style.reset()}{Color.text("#0DF")}").lower()
 print(f"{Style.reset()}", end="")
 
@@ -65,7 +69,8 @@ if load_from_log == "y" and os.path.exists("conversation_log.json"):
 else:
     prompt = ""  # Start a new conversation
 
-#TODO: Add a loop to keep the conversation going
+#TODO: Add an infinite loop for continuous conversation
+#! Endless loop for back-and-forth with the chatbot
 if __name__ == "__main__":
     try:
         while True:
