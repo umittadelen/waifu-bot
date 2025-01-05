@@ -83,6 +83,14 @@ def send_response():
     prompt += response
     return jsonify({"response": response, "name": name})
 
+@app.route("/change_personality", methods=["POST"])
+def change_personality():
+    global name, personality, prompt
+    personality = request.form["user_input"]
+    save_log(name, personality, prompt)
+    load_log()
+    return jsonify({"status": "success"})
+
 @app.route("/reset")
 def reset():
     global prompt
@@ -98,4 +106,4 @@ def saveexit():
     os._exit(0)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)
