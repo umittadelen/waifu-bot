@@ -105,7 +105,7 @@
                 </div>
                 <div class="form">
                     <label for="user_input" style="display:none;">Your Message:</label>
-                    <input id="user_input" type="text" placeholder="Type your message here... or use ( /reset | /stop | ...)" />
+                    <input id="user_input" type="text" placeholder="Type your message here... or use ( /reset | /save | ...)" />
                     <button id="send_button">Send</button>
                 </div>
             </section>
@@ -140,6 +140,7 @@
             const userInput = document.getElementById('user_input').value;
 
             if (userInput.trim() === '') return;
+
             if (userInput === "/reset") {
                 document.getElementById('chat_log').innerHTML = '';
                 document.getElementById('user_input').value = '';
@@ -150,13 +151,13 @@
             }
             if (userInput === "/stop") {
                 document.getElementById('user_input').value = '';
-                fetch('/saveexit');
+                fetch('/save');
                 checkAtBottom();
                 scrollToBottomIfAtBottom();
                 return;
             }
 
-            if (userInput.startswith("/personality ")) {
+            if (userInput.startsWith("/personality ")) {
                 document.getElementById('user_input').value = '';
                 fetch('/change_personality', {
                     method: 'POST',

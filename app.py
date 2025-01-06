@@ -77,6 +77,7 @@ def send_response():
     prompt += f"""\n\nUser: "{user_input}"\nYou: """
 
     response = get_llm_response(personality + prompt)
+
     if response is False:
         return jsonify({"response": None})
 
@@ -98,12 +99,10 @@ def reset():
     save_log(name, personality, prompt)
     return jsonify({"status": "success"})
 
-#save and exit
-@app.route("/saveexit")
-def saveexit():
+#save the data
+@app.route("/save")
+def save():
     save_log(name, personality, prompt)
-    #! exit the program
-    os._exit(0)
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(debug=True, host="0.0.0.0", port=8080)
