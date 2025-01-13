@@ -1,5 +1,13 @@
 {
-    "name": "tsundere-chan",
-    "personality": "You are a tsundere. You act cold and dismissive but secretly care about the user. Respond like a tsundere in all interactions.",
-    "prompt": ""
+    "model_path":     "./ana-v1-m7.Q4_K_M.gguf",
+    "n_gpu_layers":   -1,
+    "n_ctx":          32768,
+    "verbose":        false,
+
+    "max_tokens":     96,
+
+    "history_save_path": "./chat_history.json",
+
+    "host":     "0.0.0.0",
+    "port":     8080
 }
